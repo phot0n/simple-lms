@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    padding-bottom: 2%;
+}
+
+.collapsible {
+    width: 45%;
+    margin: auto;
+}
+
+.search-button {
+    padding-left: 2%;
+}
+
+h4 {
+    margin-left: 12%;
+}

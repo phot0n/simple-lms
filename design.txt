@@ -1,0 +1,33 @@
+LINK: https://frappe.io/dev-hiring-test
+
+####  you can assume that the app will be used by the librarian only
+
+librarian can:
+    - add books
+    - rent out books(limit 1 book per member at a time)
+    - add members
+    - remove members
+
+process:
+    1. fetch data from api - done
+        - if the number of books added are less than the number of books requested, show a banner stating that - todo
+
+    2. db init
+        - put fetched books data into db - done
+            - add a counter field for quantities available for a particular bookid - done
+        - logic for librarians and members - done
+
+    3. librarian login page - todo
+        - create login page - todo
+        - create a (very) simple session mechanism (store a session) - todo
+            - basically set the librarian name as the key and generate a uuid for login and store it in a sessions table
+
+    4. index page - todo
+        - a simple ui with a header with option to logout, add books (kind of like a dropdown with query params), add/delete members (dropdown with a form) and 
+            view(in the form of charts)/download(in the form of text) reports
+        - books - displayed in collapsable list format to keep it clean & minimal
+            - change to a dictionary (to keep the jinja code simple)
+        - debt form - todo
+        - search bar - todo
+
+

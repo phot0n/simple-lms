@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <link rel="stylesheet" href={{ url_for('static', filename='css/main.css') }}>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+{% extends "flashes.html" %}
+
+{% block body %}
+    <header>
+        <nav class="z-depth-0">
+            <div class="nav-wrapper grey darken-4">
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/reports">View Reports</a></li>
+                    <li><a class="modal-trigger" href="#booksmodal">Add Books</a></li>
+                    <li><a class="modal-trigger" href="#rentalmodal">Rental Form</a></li>
+                    <li><a class="modal-trigger" href="#debtmodal">Debt Form</a></li>
+                    <li><a class="modal-trigger" href="#membermodal">Add/Delete Members</a></li>
+                    <li><a class="btn-large amber darken-4" href="/logout">Logout</a></li>
+                </ul>
+                <li>
+                    <a class="search-button modal-trigger left" href="#searchmodal">
+                        <i class="material-icons">search</i>
+                    </a>
+                </li>
+            </div>
+        </nav>
+
+        <div id="rentalmodal" class="modal">
+            <div class="modal-content">
+                <form method=post>
+                    <dl>
+                        BookID: {{ rentalform.bookid }}
+                        Member's Username: {{ rentalform.member_username }}
+                    </dl>
+                    <input class="btn blue accent-2" name="rent-book" type=submit value=Rent>
+                    <input class="btn blue accent-2" name="return-book" type=submit value=Return>
+                </form>
+            </div>
+        </div>
+
+        <div id="booksmodal" class="modal">
+            <div class="modal-content">
+                <form method=post>
+                    <dl>
+                        Title: {{ bookform.title }}
+                        Number Of Books: {{ bookform.no_of_books }}
+                        Authors: {{ bookform.authors }}
+                        Publishers: {{ bookform.publishers }}
+                        ISBN: {{ bookform.isbn }}
+                    </dl>
+                    <input class="btn blue accent-2" name="add-books" type=submit value=Add>
+                </form>
+            </div>
+        </div>
+
+        <div id="membermodal" class="modal">
+            <div class="modal-content">
+                <form method=post>
+                    <dl>
+                        Username: {{ memberform.username }}
+                    </dl>
+                    <input class="btn blue accent-2" name="add-member" type=submit value=Add>
+                    <input class="btn blue accent-2" name="delete-member" type=submit value=Remove>
+                </form>
+            </div>
+        </div>
+
+        <div id="debtmodal" class="modal">
+            <div class="modal-content">
+                <form method=post>
+                    <dl>
+                        Member's Username: {{ debtform.username }}
+                        Amount: {{ debtform.amount }}
+                    </dl>
+                    <input class="btn blue accent-2" name="pay-debt" type=submit value=Pay>
+                </form>
+            </div>
+        </div>
+
+        <div id="searchmodal" class="modal">
+            <div class="modal-content">
+                <form method=post>
+                    <dl>
+                        BookID: {{ searchform.bookid }}
+                        Title: {{ searchform.title }}
+                        Author: {{ searchform.author }}
+                    </dl>
+                    <input class="btn blue accent-2" name="search-book" type=submit value=Search>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h4>Books:</h4>
+
+        <ul class="collapsible popout">
+            {% if book_dict %}
+                {% for bookid, values in book_dict.items() %}
+                    <li>
+                    <div class="collapsible-header">
+                        <i class="material-icons">books</i>
+                        <!-- book title -->
+                        {{ bookid }} → {{ values[0] }}
+                    </div>
+                    <div class="collapsible-body">
+                        <p class="center">
+                            By/Authors:  {{ values[1] }}
+                        </p>
+                        <p class="center">
+                            Publishers:  {{ values[2] }}
+                        </p>
+                        <p class="center">
+                            Avg. Rating:  {{ values[3] }}
+                        </p>
+                        <p class="center">
+                            Available Quantity:  {{ values[4] }}
+                        </p>
+                        <p class="center">
+                            Total Quantity:  {{ values[5] }}
+                        </p>
+                    </div>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <h6>No books Exist in the Database.</h6>
+            {% endif %}
+        </ul>
+
+    </main>
+
+    <footer class="page-footer grey darken-4">
+        <div class="container">
+          <div class="row">
+            <div class="col l6 s12">
+              <h5 class="white-text">a simple lms</h5>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <div class="container">
+          Made By Ritwik
+          <a class="text-lighten-4 right" href="https://www.linkedin.com/in/ritwik-p-130249183/">&nbsp; LinkedIn</a>
+          <a class="text-lighten-4 right" href="https://github.com/phot0n">Github</a>
+          </div>
+        </div>
+    </footer>
+
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            M.Modal.init(
+                document.querySelectorAll('.modal')
+            );
+            M.Collapsible.init(
+                document.querySelectorAll('.collapsible')
+            );
+        });
+    </script>
+
+{% endblock %}
+</html>
+        

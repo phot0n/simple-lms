@@ -1,0 +1,19 @@
+{% extends "flashes.html" %}
+
+{% block body %}
+<center>
+  <form style="padding-top: 20%;" method=post>
+    <fieldset style="display: inline-block;">
+      <legend>Login</legend>
+      <dl>
+        Librarian's Username: {{ form.username }}
+      </dl>
+      <dl>
+        Password: {{ form.password }}
+      </dl>
+      <input style="font-size: 13px; border: none; background-color: antiquewhite;" name="log" type=submit value=Login>
+      <input style="font-size: 13px; border: none; background-color: antiquewhite;" name="register" type=submit value=Register>
+  </fieldset>
+  </form>
+</center>
+{% endblock %}
