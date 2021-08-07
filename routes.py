@@ -130,7 +130,8 @@ def index_page(booklist=None):
             if membersform.validate():
                 interact_db.DBInteraction.add_member(membersform.username.data)
 
-            if request.form.get("delete-member"):
+        if request.form.get("delete-member"):
+            if membersform.validate():
                 interact_db.DBInteraction.delete_member(membersform.username.data)
 
         if request.form.get("rent-book"):

@@ -5,7 +5,7 @@ class Members(app.db.Model):
     memberid = app.db.Column(app.db.Integer, primary_key=True)
     # keeping the username unique for simplicity
     username = app.db.Column(app.db.String(64), unique=True)
-    current_rented_book = app.db.Column(app.db.Boolean, default=False) # will have bookid
+    current_rented_book = app.db.Column(app.db.String(64), nullable=True) # will have bookid
     date_of_rental = app.db.Column(app.db.String(50), nullable=True) # put date from which the book was rented
     total_money_paid = app.db.Column(app.db.Integer, default=0)
     debt = app.db.Column(app.db.Integer, default=0)

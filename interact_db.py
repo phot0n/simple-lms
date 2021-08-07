@@ -145,6 +145,12 @@ class DBInteraction:
     def delete_member(username : str):
         member = models.Members.query.filter_by(username=username).first()
         if member:
+            if member.current_rented_book:
+                book = DBInteraction.get_book(member.current_rented_book)
+                flash(f"`{username}` had book `{book.title}` rented.\
+                    Adding back to Database!")
+                book.available_quantity += 1
+
             app.db.session.delete(
                 member
             )
@@ -188,7 +194,7 @@ class DBInteraction:
             if book and book.available_quantity > 0 and member:
                 if not member.current_rented_book:
                     if member.debt < 500:
-                        member.current_rented_book = True
+                        member.current_rented_book = book.bookid
                         member.date_of_rental = datetime.now().strftime("%d/%m/%Y")
                         book.available_quantity -= 1
                         book.times_rented += 1
@@ -218,7 +224,7 @@ class DBInteraction:
                     # 10rs rent for each day
                     amount_owed = num_of_days_rented * 10
 
-                    member.current_rented_book = False
+                    member.current_rented_book = None
                     member.date_of_rental = None
                     member.debt += amount_owed
                     book.available_quantity += 1
