@@ -9,7 +9,7 @@
     - [python 3.7+](https://www.python.org/downloads/)
     - [sqlite3](https://www.sqlite.org/index.html)
 
-- clone the repo, install the dependencies -- `pip3 install requirements.txt`
+- clone the repo, install the dependencies -- `pip3 install -r requirements.txt`
 
 - run the app -- `python3 app.py`
 
@@ -45,6 +45,8 @@
     - Here we can add books, rent/take return for the book, add/delete members, take up the rent/debt from the members (based on the number of days rented), view reports and even search books (on the basis of bookid, title and author)
     - [Materialize css](https://materializecss.com/) has been used for making this page (as well as the reports one)
     - If the librarian clicks on `logout` button in the index page, the session will be deleted in the sessions table in the db (but the cookie will remain the browser and will get updated/overwritten when the librarian logs in again as the key in the cookie is the librarian's username)
+    - All the searchable fields in the frappe's api have been utilized i.e librarian can add books on the basis of title, author, isbn, publisher as well as can specify the number of books to add.
+    ![add-books-form](scshots/bookform.png)
 
 - clicking on `View Reports` in the index page will send us to reports route/page where we can view the reports of books quantities and popularity and also which member has paid how much.
 ![reports-page](scshots/reports.png)

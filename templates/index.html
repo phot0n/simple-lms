@@ -19,12 +19,12 @@
         <nav class="z-depth-0">
             <div class="nav-wrapper grey darken-4">
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="/reports">View Reports</a></li>
+                    <li><a href={{ url_for("reports") }}>View Reports</a></li>
                     <li><a class="modal-trigger" href="#booksmodal">Add Books</a></li>
                     <li><a class="modal-trigger" href="#rentalmodal">Rental Form</a></li>
                     <li><a class="modal-trigger" href="#debtmodal">Debt Form</a></li>
                     <li><a class="modal-trigger" href="#membermodal">Add/Delete Members</a></li>
-                    <li><a class="btn-large amber darken-4" href="/logout">Logout</a></li>
+                    <li><a class="btn-large amber darken-4" href={{ url_for("logout") }}>Logout</a></li>
                 </ul>
                 <li>
                     <a class="search-button modal-trigger left" href="#searchmodal">

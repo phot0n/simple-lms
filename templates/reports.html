@@ -22,9 +22,12 @@
                         <a class="brand-logo center">Reports</a>
                     </li>
                     <li>
-                        <a class="left" href="/index">Back (index)</a> 
+                        <a class="left" href={{ url_for('index_page') }}>Back (index)</a> 
                     </li>
                 </ul>
+                <li>
+                    <a class="right" style="padding-right: 1%;" href={{ url_for("reports", raw=True) }}>Show Raw Data</a> 
+                </li>
             </div>
         </nav>
 

@@ -5,7 +5,7 @@ from flask import request
 from flask import redirect
 from flask import render_template
 from flask import flash, url_for
-from flask import make_response
+from flask import make_response, jsonify
 
 
 import interact_db
@@ -118,10 +118,10 @@ def index_page(booklist=None):
             if booksform.validate():
                 l, d = frappeAPI.get_data(
                     number_of_books=booksform.no_of_books.data,
-                    title=booksform.title.data,
-                    authors=booksform.authors.data,
-                    publisher=booksform.publishers.data,
-                    isbn=booksform.isbn.data
+                    title=booksform.title.data.strip(),
+                    authors=booksform.authors.data.strip(),
+                    publisher=booksform.publishers.data.strip(),
+                    isbn=booksform.isbn.data.strip()
                 )
                 interact_db.DBInteraction.add_books(d)
                 msg = f"Found {l} books for the query - Added to the Database"
@@ -226,11 +226,13 @@ def logout():
 
 
 # /reports
-def reports():
+def reports(raw=None):
     if helper_funcs.check_session(request):
         book_dict, member_dict = helper_funcs.get_report_data(
             interact_db.DBInteraction.get_all_books(),
             interact_db.DBInteraction.get_all_members()
         )
+        if request.args.get("raw") and request.args.get("raw") == "True":
+            return jsonify({"books": book_dict, "member": member_dict})
         return render_template("reports.html", books=book_dict, members=member_dict)
     return redirect(url_for("login_page"))
