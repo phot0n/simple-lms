@@ -1,6 +1,5 @@
 from flask import request
 
-from models import Books, Members
 import interact_db
 
 
@@ -26,7 +25,7 @@ def del_session(req: request):
             interact_db.DBInteraction.delete_session(lib_name, uuid=uid)
 
 
-def convert_books_obj_to_dict(books : list[Books]):
+def convert_books_obj_to_dict(books : list):
     books_dict = {}
     if books:
         for book in books:
@@ -42,7 +41,7 @@ def convert_books_obj_to_dict(books : list[Books]):
     return books_dict
 
 
-def get_report_data(books : list[Books], members : list[Members]):
+def get_report_data(books : list, members : list):
     books_chart= {
         "rented": [],
         "available": [],

@@ -1,6 +1,6 @@
 import re
 import uuid
-import yaml
+import ast
 from flask import request
 from flask import redirect
 from flask import render_template
@@ -90,8 +90,8 @@ def index_page(booklist=None):
             # check the request args for searched books
             args_books = request.args.get("booklist", None)
             if args_books and args_books != "{}":
-                books = yaml.load(
-                    args_books, Loader=yaml.BaseLoader
+                books = ast.literal_eval(
+                    args_books
                 )
             else:
                 books = helper_funcs.convert_books_obj_to_dict(
@@ -205,7 +205,8 @@ def index_page(booklist=None):
             if not books:
                 msg = "No books found for the query"            
 
-        flash(msg)
+        if msg:
+            flash(msg)
 
         if books:
             return redirect(url_for("index_page", booklist=books))
