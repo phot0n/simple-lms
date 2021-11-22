@@ -1,7 +1,5 @@
 ## a simple lms
 
-#
-
 ### Setup
 - prereqs: 
     - [python 3.7+](https://www.python.org/downloads/)
