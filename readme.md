@@ -1,7 +1,5 @@
 ## a simple lms
 
-> NOTE: This app has been deployed on [pythonanywhere](pythonanywhere.com) which is accessible [here](http://ritwik0.pythonanywhere.com). The only caveat is pythonanywhere doesn't allow the datafetcher's (i.e frappe's) api to pass through it's firewall ([reference](https://help.pythonanywhere.com/pages/403ForbiddenError/)) so no books can be added in the deployed app AT THE MOMENT (which you can do if you setup on your local) but the rest whole web-app is functional. (I could've used Heroku but it's not very compatible with sqlite db - Will try to port on aws or any other cloud provider.)
-
 #
 
 ### Setup
